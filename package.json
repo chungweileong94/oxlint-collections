@@ -5,9 +5,14 @@
   "type": "module",
   "scripts": {
     "check": "vp check",
+    "changeset:add": "changeset",
+    "changeset:publish": "changeset publish",
+    "changeset:version": "changeset version",
     "prepare": "vp config"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
     "vite-plus": "^0.2.9"
   },
   "devEngines": {

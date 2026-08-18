@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Vite Plus
+        uses: voidzero-dev/setup-vp@v1.17.0
+        with:
+          cache: true
+          run-install: true
+
+      - name: Check package
+        run: vpr check
+
+      - name: Create release or publish packages
+        uses: changesets/action@v1.4.9
+        with:
+          commit: "chore(release): 📦 version packages"
+          title: "chore(release): 📦 version packages"
+          publish: vpr changeset:publish
+          version: vpr changeset:version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
