@@ -1,6 +1,6 @@
 {
   "name": "@chungwei/oxlint-config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Opinionated Oxlint config with both strict and flexible.",
   "files": [
     "src",
