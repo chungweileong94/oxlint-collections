@@ -1,11 +1,11 @@
-# `@cw/oxlint-config`
+# `@chungwei/oxlint-config`
 
 Opinionated Oxlint config with both strict and flexible.
 
 ## Installation
 
 ```sh
-npm install -D @cw/oxlint-config oxlint
+npm install -D @chungwei/oxlint-config oxlint
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ Create an `oxlint.config.ts` in the consuming project:
 
 ```ts
 import { defineConfig } from "oxlint";
-import config from "@cw/oxlint-config";
+import config from "@chungwei/oxlint-config";
 
 export default defineConfig({
   options: {

@@ -1,5 +1,5 @@
 {
-  "name": "@cw/oxlint-config",
+  "name": "@chungwei/oxlint-config",
   "version": "0.1.0",
   "description": "Opinionated Oxlint config with both strict and flexible.",
   "files": [

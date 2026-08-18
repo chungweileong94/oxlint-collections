@@ -1,5 +1,5 @@
 {
-  "name": "@cw/oxlint-collections",
+  "name": "@chungwei/oxlint-collections",
   "private": true,
   "description": "Reusable Oxlint configuration and plugin",
   "type": "module",
