@@ -33,10 +33,10 @@ jobs:
       - name: Create release or publish packages
         uses: changesets/action@v2.1.0
         with:
-          commit: "chore(release): 📦 version packages"
-          title: "chore(release): 📦 version packages"
-          publish: vpr changeset:publish
-          version: vpr changeset:version
+          commit-mesage: "chore(release): 📦 version packages"
+          pr-title: "chore(release): 📦 version packages"
+          publish-script: vpr changeset:publish
+          version-script: vpr changeset:version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
