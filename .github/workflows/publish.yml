@@ -31,7 +31,7 @@ jobs:
         run: vpr check
 
       - name: Create release or publish packages
-        uses: changesets/action@v1.4.9
+        uses: changesets/action@v2.1.0
         with:
           commit: "chore(release): 📦 version packages"
           title: "chore(release): 📦 version packages"
