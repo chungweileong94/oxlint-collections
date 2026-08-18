@@ -1,5 +1,5 @@
 import { defineConfig } from "vite-plus";
-import config from "./packages/oxlint-config/src/index.ts";
+import config from "./packages/oxlint-config/src/index.js";
 
 export default defineConfig({
   staged: {
