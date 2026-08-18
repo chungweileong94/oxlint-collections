@@ -1,0 +1,25 @@
+{
+  "name": "@cw/oxlint-collections",
+  "private": true,
+  "description": "Reusable Oxlint configuration and plugin",
+  "type": "module",
+  "scripts": {
+    "check": "vp check",
+    "prepare": "vp config"
+  },
+  "devDependencies": {
+    "vite-plus": "^0.2.9"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.22.0",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "24.19.0",
+      "onFail": "download"
+    }
+  }
+}
