@@ -2,6 +2,9 @@
   "name": "@chungwei/oxlint-config",
   "version": "0.2.0",
   "description": "Opinionated Oxlint config with both strict and flexible.",
+  "repository": {
+    "url": "https://github.com/chungweileong94/oxlint-collections"
+  },
   "files": [
     "src",
     "README.md"
