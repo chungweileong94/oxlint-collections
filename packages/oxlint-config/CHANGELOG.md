@@ -1,5 +1,16 @@
 # @chungwei/oxlint-config
 
+## 0.4.0
+
+### Minor Changes
+
+- [#4](https://github.com/chungweileong94/oxlint-collections/pull/4) [`b6c973a`](https://github.com/chungweileong94/oxlint-collections/commit/b6c973a7f25eab43a59af4163e42224eb4677878) Thanks [@chungweileong94](https://github.com/chungweileong94)! - Add the `no-use-effect` rule to disallow direct React `useEffect` calls and enable it as an error in the shared config. The rule recognizes React import aliases and shadowed bindings, with no automatic fix.
+
+### Patch Changes
+
+- Updated dependencies [[`b6c973a`](https://github.com/chungweileong94/oxlint-collections/commit/b6c973a7f25eab43a59af4163e42224eb4677878)]:
+  - @chungwei/oxlint-plugin@0.2.0
+
 ## 0.3.0
 
 ### Minor Changes
