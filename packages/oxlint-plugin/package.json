@@ -1,6 +1,6 @@
 {
   "name": "@chungwei/oxlint-plugin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Custom Oxlint rules for source text and React components",
   "repository": {
     "url": "https://github.com/chungweileong94/oxlint-collections",
