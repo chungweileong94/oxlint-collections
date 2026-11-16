@@ -3,7 +3,7 @@ import config from "./packages/oxlint-config/src/index.js";
 
 export default defineConfig({
   staged: {
-    "*": "vp check --fix",
+    "*": "pnpm check --fix",
   },
   fmt: {
     ignorePatterns: [],
@@ -15,5 +15,13 @@ export default defineConfig({
       reportUnusedDisableDirectives: "error",
     },
     extends: [config],
+    overrides: [
+      {
+        files: ["packages/oxlint-plugin/src/rules/no-em-dash.test.ts"],
+        rules: {
+          "chungwei/no-em-dash": "off",
+        },
+      },
+    ],
   },
 });

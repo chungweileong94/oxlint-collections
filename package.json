@@ -4,15 +4,20 @@
   "description": "Reusable Oxlint configuration and plugin",
   "type": "module",
   "scripts": {
+    "precheck": "pnpm build",
     "check": "vp check",
     "changeset:add": "changeset",
     "changeset:publish": "changeset publish",
     "changeset:version": "changeset version",
-    "prepare": "vp config"
+    "prepare": "vp config",
+    "pretest": "pnpm build",
+    "test": "vp test run",
+    "build": "pnpm --filter @chungwei/oxlint-plugin build"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.0",
     "@changesets/cli": "^3.0.0",
+    "@types/node": "^24",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

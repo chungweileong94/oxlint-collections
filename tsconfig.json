@@ -5,7 +5,8 @@
     "moduleResolution": "NodeNext",
     "noEmit": true,
     "strict": true,
-    "target": "es2022"
+    "target": "es2022",
+    "types": ["node"]
   },
   "include": ["oxlint.config.ts", "packages/**/*.ts"]
 }

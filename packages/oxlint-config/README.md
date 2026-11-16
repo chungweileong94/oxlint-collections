@@ -2,6 +2,10 @@
 
 Opinionated Oxlint config with both strict and flexible.
 
+Includes `@chungwei/oxlint-plugin` and enables all its rules as errors.
+
+The plugin is a dependency of this config and needs no separate installation or registration. See the [plugin documentation](../oxlint-plugin/README.md) for rule behavior.
+
 ## Installation
 
 ```sh

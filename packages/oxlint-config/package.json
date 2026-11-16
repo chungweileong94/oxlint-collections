@@ -7,6 +7,7 @@
   },
   "files": [
     "src",
+    "!src/**/*.test.ts",
     "README.md"
   ],
   "type": "module",
@@ -19,6 +20,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@chungwei/oxlint-plugin": "workspace:^"
   },
   "peerDependencies": {
     "oxlint": ">=1.79.0"

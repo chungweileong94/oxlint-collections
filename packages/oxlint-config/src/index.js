@@ -1,12 +1,23 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "oxlint";
 
 const config = defineConfig({
   plugins: ["eslint", "unicorn", "typescript", "oxc", "react"],
+  jsPlugins: [
+    {
+      name: "chungwei",
+      specifier: fileURLToPath(import.meta.resolve("@chungwei/oxlint-plugin")),
+    },
+  ],
   categories: {
     correctness: "error",
     suspicious: "error",
   },
   rules: {
+    "chungwei/no-em-dash": "error",
+    "chungwei/no-inline-component-props": "error",
+    "chungwei/prefer-jsx-short-circuit": "error",
+
     "no-var": "error",
     "no-console": [
       "error",

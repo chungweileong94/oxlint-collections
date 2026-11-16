@@ -1,0 +1,38 @@
+{
+  "name": "@chungwei/oxlint-plugin",
+  "version": "0.0.0",
+  "description": "Custom Oxlint rules for source text and React components",
+  "repository": {
+    "url": "https://github.com/chungweileong94/oxlint-collections",
+    "directory": "packages/oxlint-plugin"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prepack": "pnpm run build"
+  },
+  "dependencies": {
+    "@oxlint/plugins": "^1.79.0"
+  },
+  "devDependencies": {
+    "oxlint": "1.79.0",
+    "typescript": "^7.0.2"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.79.0"
+  }
+}
