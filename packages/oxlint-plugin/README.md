@@ -8,8 +8,6 @@ Custom Oxlint rules migrated from paint-mixer-app.
 npm install -D @chungwei/oxlint-plugin oxlint
 ```
 
-Requires Oxlint 1.79.0 or later. The rules are authored in TypeScript and published as unbundled JavaScript with TypeScript declarations. Consumers need no build step, TypeScript loader, or Vite+ runtime.
-
 ## Usage
 
 Add the plugin and enable the rules in `oxlint.config.ts`:
