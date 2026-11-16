@@ -16,6 +16,7 @@ const config = defineConfig({
   rules: {
     "chungwei/no-em-dash": "error",
     "chungwei/no-inline-component-props": "error",
+    "chungwei/no-use-effect": "error",
     "chungwei/prefer-jsx-short-circuit": "error",
 
     "no-var": "error",

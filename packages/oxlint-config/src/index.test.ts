@@ -12,7 +12,7 @@ it("enables every custom rule through the shared config and allows overrides", (
     writeFileSync(join(directory, ".oxlintrc.json"), JSON.stringify(config));
     writeFileSync(
       join(directory, "invalid.tsx"),
-      'export function Panel({ count }: { count: number }) { return <div title="&mdash;">{count ? <span /> : null}</div>; }',
+      'import { useEffect } from "react"; export function Panel({ count }: { count: number }) { useEffect(() => {}, []); return <div title="&mdash;">{count ? <span /> : null}</div>; }',
     );
     writeFileSync(
       join(directory, "valid.tsx"),
@@ -31,11 +31,12 @@ it("enables every custom rule through the shared config and allows overrides", (
     const report = JSON.parse(result.stdout) as {
       diagnostics: { code: string; severity: string; filename: string }[];
     };
-    expect(report.diagnostics).toHaveLength(3);
+    expect(report.diagnostics).toHaveLength(4);
     expect(report.diagnostics.map((diagnostic) => diagnostic.code)).toEqual(
       expect.arrayContaining([
         "chungwei(no-em-dash)",
         "chungwei(no-inline-component-props)",
+        "chungwei(no-use-effect)",
         "chungwei(prefer-jsx-short-circuit)",
       ]),
     );
@@ -53,6 +54,7 @@ it("enables every custom rule through the shared config and allows overrides", (
           ...config.rules,
           "chungwei/no-em-dash": "off",
           "chungwei/no-inline-component-props": "off",
+          "chungwei/no-use-effect": "off",
           "chungwei/prefer-jsx-short-circuit": "off",
         },
       }),
