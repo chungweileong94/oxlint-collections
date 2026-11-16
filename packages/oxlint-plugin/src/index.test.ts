@@ -26,17 +26,27 @@ it("loads the plugin in Oxlint and runs every rule using a consumer alias", () =
         rules: {
           "custom/no-em-dash": "error",
           "custom/no-inline-component-props": "error",
+          "custom/no-use-effect": "error",
           "custom/prefer-jsx-short-circuit": "error",
         },
       }),
     );
     const code =
-      'function Panel({ count }: { count: number }) { return <div title="&mdash;">{count ? <span /> : null}</div>; }';
+      'import { useEffect as effect } from "react"; function Panel({ count }: { count: number }) { effect(() => {}, []); return <div title="&mdash;">{count ? <span /> : null}</div>; }';
     writeFileSync(join(directory, "first.tsx"), code);
     writeFileSync(join(directory, "second.tsx"), code);
     writeFileSync(
       join(directory, "valid.tsx"),
       'interface Props { count: number } function Panel({ count }: Props) { return <div title="hello">{!!count && <span />}</div>; }',
+    );
+    writeFileSync(
+      join(directory, "exception.tsx"),
+      `import { useEffect } from "react";
+function Widget() {
+  // oxlint-disable-next-line custom/no-use-effect -- Synchronize the external widget.
+  useEffect(() => {}, []);
+  return null;
+}`,
     );
     const cli = fileURLToPath(new URL("../bin/oxlint", import.meta.resolve("oxlint")));
     const result = spawnSync(
@@ -54,7 +64,7 @@ it("loads the plugin in Oxlint and runs every rule using a consumer alias", () =
     const report = JSON.parse(result.stdout) as {
       diagnostics: { code: string; filename: string }[];
     };
-    expect(report.diagnostics).toHaveLength(6);
+    expect(report.diagnostics).toHaveLength(8);
     for (const filename of ["first.tsx", "second.tsx"]) {
       expect(
         report.diagnostics
@@ -64,6 +74,7 @@ it("loads the plugin in Oxlint and runs every rule using a consumer alias", () =
         expect.arrayContaining([
           "custom(no-em-dash)",
           "custom(no-inline-component-props)",
+          "custom(no-use-effect)",
           "custom(prefer-jsx-short-circuit)",
         ]),
       );

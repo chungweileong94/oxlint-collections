@@ -20,12 +20,13 @@ export default defineConfig({
   rules: {
     "chungwei/no-em-dash": "error",
     "chungwei/no-inline-component-props": "error",
+    "chungwei/no-use-effect": "error",
     "chungwei/prefer-jsx-short-circuit": "error",
   },
 });
 ```
 
-The same `jsPlugins` and `rules` entries work under `lint` in a Vite+ config. All rules accept no options. Enable them individually when using this plugin directly. `@chungwei/oxlint-config` installs the plugin and enables all three rules as errors.
+The same `jsPlugins` and `rules` entries work under `lint` in a Vite+ config. All rules accept no options. Enable them individually when using this plugin directly. `@chungwei/oxlint-config` installs the plugin and enables all its rules as errors.
 
 The plugin is also available as both a default and a named export:
 
@@ -42,6 +43,7 @@ When replacing the app's local plugin, use the alias `custom` instead of `chungw
 | --------------------------- | ---------------------------------------------------------------------------------------- | ----------------- |
 | `no-em-dash`                | Disallows em dashes in string literals, template text, JSX text, and JSX attribute text. | None              |
 | `no-inline-component-props` | Requires named types for destructured component props in `.tsx` files.                   | None              |
+| `no-use-effect`             | Disallows direct React `useEffect` calls in components and custom hooks.                 | None              |
 | `prefer-jsx-short-circuit`  | Prefers short-circuit rendering for JSX child ternaries with one empty branch.           | Editor suggestion |
 
 ### `no-em-dash`
@@ -69,6 +71,44 @@ function Panel({ title }: PanelProps) {
 ```
 
 Non-destructured props, named types, ordinary helper functions, and files other than `.tsx` are allowed. The rule does not rename or extract types automatically.
+
+### `no-use-effect`
+
+`useEffect` is hard to use correctly without experience with React. Choosing dependencies, avoiding stale closures, and handling setup and cleanup require understanding how Effects interact with rendering. Mistakes can cause repeated updates, stale data, or subscriptions that never get cleaned up.
+
+This rule bans direct `useEffect` calls by default to steer developers and coding agents toward simpler patterns. Calculate derived values during render, handle user actions in event handlers, and use the project's data fetching or subscription hooks where appropriate. For example, deriving a greeting from a prop needs no Effect or extra state:
+
+```tsx
+// Reported
+import { useEffect } from "react";
+
+function Greeting({ name }: GreetingProps) {
+  const [greeting, setGreeting] = useState("");
+  useEffect(() => {
+    setGreeting(`Hello, ${name}`);
+  }, [name]);
+  return <p>{greeting}</p>;
+}
+
+// Allowed
+function Greeting({ name }: GreetingProps) {
+  const greeting = `Hello, ${name}`;
+  return <p>{greeting}</p>;
+}
+```
+
+See React's [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect) guide for more alternatives. Do not move side effects into render, `useMemo`, or `useLayoutEffect` to bypass this rule.
+
+Effects are still appropriate for synchronizing with external systems. When one is necessary, use a narrow disable comment explaining why, or turn the rule off for a specific integration file through a config override:
+
+```tsx
+// oxlint-disable-next-line chungwei/no-use-effect -- Keep the external widget synchronized with the selected value.
+useEffect(() => {
+  widget.setValue(value);
+}, [widget, value]);
+```
+
+The rule checks components and custom hooks in JavaScript and TypeScript, recognizes React import aliases and namespace access, and reports unbound `useEffect` and `React.useEffect` calls. Shadowed names, imports from other libraries, and type-only imports are ignored. It checks direct calls only; it does not trace variable aliases, re-exports, CommonJS imports, or dynamic property access. There is no automatic fix because the replacement depends on the Effect's purpose.
 
 ### `prefer-jsx-short-circuit`
 
