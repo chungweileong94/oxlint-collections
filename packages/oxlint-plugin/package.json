@@ -1,6 +1,6 @@
 {
   "name": "@chungwei/oxlint-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Custom Oxlint rules for JavaScript, TypeScript, and React",
   "license": "MIT",
   "repository": {

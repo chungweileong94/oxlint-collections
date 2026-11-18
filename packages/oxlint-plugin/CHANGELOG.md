@@ -1,5 +1,11 @@
 # @chungwei/oxlint-plugin
 
+## 0.3.0
+
+### Minor Changes
+
+- [#6](https://github.com/chungweileong94/oxlint-collections/pull/6) [`a7a456f`](https://github.com/chungweileong94/oxlint-collections/commit/a7a456ffe6a2fb184abd638fb29a4ac7c17a5ea1) Thanks [@chungweileong94](https://github.com/chungweileong94)! - Add `no-array-filter-map`, `no-chained-type-assertions`, `no-known-value-widening`, `no-object-parameters`, `no-unknown-returns`, and `no-widen-then-assert`. Enable all six as errors in the shared config.
+
 ## 0.2.0
 
 ### Minor Changes
