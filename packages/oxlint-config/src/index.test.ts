@@ -12,7 +12,15 @@ it("enables every custom rule through the shared config and allows overrides", (
     writeFileSync(join(directory, ".oxlintrc.json"), JSON.stringify(config));
     writeFileSync(
       join(directory, "invalid.tsx"),
-      'import { useEffect } from "react"; export function Panel({ count }: { count: number }) { useEffect(() => {}, []); return <div title="&mdash;">{count ? <span /> : null}</div>; }',
+      `import { useEffect } from "react";
+export function Panel({ count }: { count: number }) { useEffect(() => {}, []); return <div title="&mdash;">{count ? <span /> : null}</div>; }
+const numbers = [1, 2];
+export const selected = numbers.filter(n => n > 1).map(n => n + 1);
+export const cast = "raw" as unknown as string;
+const widened: unknown = "sample";
+export const narrowed = widened as string;
+export function acceptsObject(input: object) { return input; }
+export function returnsUnknown(input: unknown): unknown { return input; }`,
     );
     writeFileSync(
       join(directory, "valid.tsx"),
@@ -31,12 +39,18 @@ it("enables every custom rule through the shared config and allows overrides", (
     const report = JSON.parse(result.stdout) as {
       diagnostics: { code: string; severity: string; filename: string }[];
     };
-    expect(report.diagnostics).toHaveLength(4);
+    expect(report.diagnostics).toHaveLength(10);
     expect(report.diagnostics.map((diagnostic) => diagnostic.code)).toEqual(
       expect.arrayContaining([
+        "chungwei(no-array-filter-map)",
+        "chungwei(no-chained-type-assertions)",
         "chungwei(no-em-dash)",
         "chungwei(no-inline-component-props)",
+        "chungwei(no-known-value-widening)",
+        "chungwei(no-object-parameters)",
+        "chungwei(no-unknown-returns)",
         "chungwei(no-use-effect)",
+        "chungwei(no-widen-then-assert)",
         "chungwei(prefer-jsx-short-circuit)",
       ]),
     );
@@ -52,9 +66,15 @@ it("enables every custom rule through the shared config and allows overrides", (
         ...config,
         rules: {
           ...config.rules,
+          "chungwei/no-array-filter-map": "off",
+          "chungwei/no-chained-type-assertions": "off",
           "chungwei/no-em-dash": "off",
           "chungwei/no-inline-component-props": "off",
+          "chungwei/no-known-value-widening": "off",
+          "chungwei/no-object-parameters": "off",
+          "chungwei/no-unknown-returns": "off",
           "chungwei/no-use-effect": "off",
+          "chungwei/no-widen-then-assert": "off",
           "chungwei/prefer-jsx-short-circuit": "off",
         },
       }),
