@@ -2,6 +2,7 @@
   "name": "@chungwei/oxlint-plugin",
   "version": "0.2.0",
   "description": "Custom Oxlint rules for JavaScript, TypeScript, and React",
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/chungweileong94/oxlint-collections",
     "directory": "packages/oxlint-plugin"
@@ -9,7 +10,7 @@
   "files": [
     "dist",
     "README.md",
-    "src/rules/anti-slop/LICENSE"
+    "src/rules/anti-slop/NOTICE"
   ],
   "type": "module",
   "exports": {
