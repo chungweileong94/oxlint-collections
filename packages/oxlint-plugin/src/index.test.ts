@@ -24,15 +24,28 @@ it("loads the plugin in Oxlint and runs every rule using a consumer alias", () =
           },
         ],
         rules: {
+          "custom/no-array-filter-map": "error",
+          "custom/no-chained-type-assertions": "error",
           "custom/no-em-dash": "error",
           "custom/no-inline-component-props": "error",
+          "custom/no-known-value-widening": "error",
+          "custom/no-object-parameters": "error",
+          "custom/no-unknown-returns": "error",
           "custom/no-use-effect": "error",
+          "custom/no-widen-then-assert": "error",
           "custom/prefer-jsx-short-circuit": "error",
         },
       }),
     );
-    const code =
-      'import { useEffect as effect } from "react"; function Panel({ count }: { count: number }) { effect(() => {}, []); return <div title="&mdash;">{count ? <span /> : null}</div>; }';
+    const code = `import { useEffect as effect } from "react";
+function Panel({ count }: { count: number }) { effect(() => {}, []); return <div title="&mdash;">{count ? <span /> : null}</div>; }
+const numbers = [1, 2];
+export const selected = numbers.filter(n => n > 1).map(n => n + 1);
+export const cast = "raw" as unknown as string;
+const widened: unknown = "sample";
+export const narrowed = widened as string;
+export function acceptsObject(input: object) { return input; }
+export function returnsUnknown(input: unknown): unknown { return input; }`;
     writeFileSync(join(directory, "first.tsx"), code);
     writeFileSync(join(directory, "second.tsx"), code);
     writeFileSync(
@@ -64,7 +77,7 @@ function Widget() {
     const report = JSON.parse(result.stdout) as {
       diagnostics: { code: string; filename: string }[];
     };
-    expect(report.diagnostics).toHaveLength(8);
+    expect(report.diagnostics).toHaveLength(20);
     for (const filename of ["first.tsx", "second.tsx"]) {
       expect(
         report.diagnostics
@@ -72,9 +85,15 @@ function Widget() {
           .map((diagnostic) => diagnostic.code),
       ).toEqual(
         expect.arrayContaining([
+          "custom(no-array-filter-map)",
+          "custom(no-chained-type-assertions)",
           "custom(no-em-dash)",
           "custom(no-inline-component-props)",
+          "custom(no-known-value-widening)",
+          "custom(no-object-parameters)",
+          "custom(no-unknown-returns)",
           "custom(no-use-effect)",
+          "custom(no-widen-then-assert)",
           "custom(prefer-jsx-short-circuit)",
         ]),
       );

@@ -14,9 +14,15 @@ const config = defineConfig({
     suspicious: "error",
   },
   rules: {
+    "chungwei/no-array-filter-map": "error",
+    "chungwei/no-chained-type-assertions": "error",
     "chungwei/no-em-dash": "error",
     "chungwei/no-inline-component-props": "error",
+    "chungwei/no-known-value-widening": "error",
+    "chungwei/no-object-parameters": "error",
+    "chungwei/no-unknown-returns": "error",
     "chungwei/no-use-effect": "error",
+    "chungwei/no-widen-then-assert": "error",
     "chungwei/prefer-jsx-short-circuit": "error",
 
     "no-var": "error",
